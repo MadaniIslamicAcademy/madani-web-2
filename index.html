@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madani Islamic Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Noto+Nastaliq+Urdu:wght@400..700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Custom styles for background and specific elements */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F0F0F0; /* Light Grey background - Logo ke grey background se milta julta */
+            color: #333;
+            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+        }
+        .urdu-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            direction: rtl; /* Right-to-Left for Urdu */
+            text-align: right;
+        }
+        /* Academy ke logo ke asal rang */
+        .logo-green {
+            background-color: #0A4F31; /* Logo ka Gehra Sabz (Dark Green) */
+        }
+        .logo-yellow {
+            background-color: #FFFF00; /* Logo ka Chamkeela Peela (Bright Yellow) */
+        }
+         .text-logo-green {
+             color: #0A4F31; /* Logo ka Gehra Sabz */
+        }
+        .text-logo-yellow {
+            color: #FFFF00; /* Logo ka Chamkeela Peela */
+        }
+        .border-logo-green {
+            border-color: #0A4F31; /* Logo ka Gehra Sabz */
+        }
+        .border-logo-yellow {
+            border-color: #FFFF00; /* Logo ka Chamkeela Peela */
+        }
+        .subtle-islamic-bg {
+            /* Placeholder for subtle pattern - Aap yahan koi Islami pattern ki image laga sakte hain */
+            background-image: url('https://placehold.co/1920x500/E8E8E8/B0B0B0?text=Subtle+Islamic+Pattern'); /* Light grey pattern */
+            background-size: cover;
+            background-position: center;
+        }
+         .rounded-xl {
+            border-radius: 1rem; /* Zyada gol kinare */
+        }
+         .shadow-lg-custom {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Thora behtar shadow */
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 1s ease-out;
+        }
+
+        .animate-slideInUp {
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        /* Hover Effects (using transitions for smoothness) */
+         .button-hover-effect {
+            transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+         }
+         .button-hover-effect:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1); /* Thora chamkeela ho hover par */
+         }
+
+         .card-hover-effect {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+         }
+         .card-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* Zyada gehra shadow hover par */
+         }
+
+         /* Modal styles (for simulating pop-ups) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close-button:hover,
+        .close-button:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="leading-normal tracking-normal">
+
+    <header class="logo-green text-white shadow-lg-custom animate-fadeIn">
+        <div class="container mx-auto flex flex-wrap items-center justify-between mt-0 py-4 px-6">
+            <div class="flex items-center">
+                <img src="https://placehold.co/100x50/FFFF00/0A4F31?text=Logo" alt="Madani Islamic Academy Logo" class="h-12 mr-4 rounded-xl shadow">
+                <a class="text-white no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="#">
+                    Madani Islamic Academy
+                </a>
+            </div>
+
+            <div class="block lg:hidden">
+                <button id="nav-toggle" class="flex items-center px-3 py-2 border rounded text-gray-200 border-gray-400 hover:text-white hover:border-white">
+                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v15z"/></svg>
+                </button>
+            </div>
+
+            <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden lg:block mt-2 lg:mt-0 logo-green z-20" id="nav-content">
+                <ul class="list-reset lg:flex justify-end flex-1 items-center">
+                    <li class="mr-3">
+                        <a class="inline-block py-2 px-4 text-white no-underline hover:text-gray-200 hover:underline rounded-xl" href="#hero">Home</a>
+                    </li>
+                    <li class="mr-3">
+                        <a class="inline-block text-gray-200 no-underline hover:text-white hover:underline py-2 px-4 rounded-xl" href="#features">Features</a>
+                    </li>
+                    <li class="mr-3">
+                        <a class="inline-block text-gray-200 no-underline hover:text-white hover:underline py-2 px-4 rounded-xl" href="#portals">Portals</a>
+                    </li>
+                     <li class="mr-3">
+                        <a class="inline-block text-gray-200 no-underline hover:text-white hover:underline py-2 px-4 rounded-xl" href="#recordings">Recordings</a>
+                    </li>
+                     <li class="mr-3">
+                        <a class="inline-block text-gray-200 no-underline hover:text-white hover:underline py-2 px-4 rounded-xl" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <section id="hero" class="subtle-islamic-bg text-center py-20 px-6 animate-fadeIn">
+        <h1 class="my-4 text-4xl lg:text-5xl font-bold leading-tight text-logo-green animate-slideInUp">
+            Quality Online Islamic Education
+        </h1>
+        <p class="leading-normal text-xl mb-8 text-gray-700 animate-slideInUp" style="animation-delay: 0.2s;">
+            Providing secure, transparent, and quality education of Quran, Qaida, and Islamic teachings.
+        </p>
+        <button class="mx-auto lg:mx-0 button-hover-effect logo-yellow text-logo-green font-bold rounded-full my-6 py-4 px-8 shadow-lg-custom focus:outline-none focus:shadow-outline animate-slideInUp learn-more-button" style="animation-delay: 0.4s;">
+            Learn More
+        </button>
+    </section>
+
+    <section id="features" class="py-20 px-6 bg-white">
+        <div class="container mx-auto text-center">
+            <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-logo-green animate-fadeIn">
+                Key Features
+            </h2>
+            <div class="flex flex-wrap -mx-4 mt-10">
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.1s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Student Portal</h3>
+                        <p class="text-gray-700">Login, join classes, check attendance, view results, pay fees, watch recordings.</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.2s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Teacher Portal</h3>
+                        <p class="text-gray-700">Login, mark attendance, provide feedback, access class recordings.</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.3s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Admin Dashboard</h3>
+                        <p class="text-gray-700">Manage students, teachers, classes, recordings, fees, and notifications.</p>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.4s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Class Recordings</h3>
+                        <p class="text-gray-700">Automatic recording, secure storage, password protection, optional auto-deletion.</p>
+                    </div>
+                </div>
+                 <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.5s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Feedback & Evaluation</h3>
+                        <p class="text-gray-700">Teacher feedback forms, admin notes, performance reports in result cards.</p>
+                    </div>
+                </div>
+                 <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.6s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Online Payments</h3>
+                        <p class="text-gray-700">Integration with JazzCash, EasyPaisa, PayPal, Stripe.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portals" class="py-20 px-6 logo-green text-white animate-fadeIn">
+        <div class="container mx-auto text-center">
+             <h2 class="w-full my-2 text-4xl font-bold leading-tight text-white animate-slideInUp">
+                Access Your Portal
+            </h2>
+            <div class="flex flex-wrap -mx-4 mt-10">
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.1s;">
+                    <div class="p-6 bg-gray-800 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-yellow">Student Portal</h3>
+                        <p class="text-gray-300 mb-4">Access your classes, attendance, results, and fees.</p>
+                        <button class="hover:underline logo-yellow text-logo-green font-bold rounded-full my-3 py-3 px-6 shadow-lg-custom focus:outline-none focus:shadow-outline button-hover-effect portal-button" data-portal="student">
+                            Go to Student Portal
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.2s;">
+                    <div class="p-6 bg-gray-800 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-yellow">Teacher Portal</h3>
+                        <p class="text-gray-300 mb-4">Manage attendance, submit feedback, and view recordings.</p>
+                         <button class="hover:underline logo-yellow text-logo-green font-bold rounded-full my-3 py-3 px-6 shadow-lg-custom focus:outline-none focus:shadow-outline button-hover-effect portal-button" data-portal="teacher">
+                            Go to Teacher Portal
+                        </button>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.3s;">
+                    <div class="p-6 bg-gray-800 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-yellow">Admin Dashboard</h3>
+                        <p class="text-gray-300 mb-4">Full control panel for managing the academy.</p>
+                         <button class="hover:underline logo-yellow text-logo-green font-bold rounded-full my-3 py-3 px-6 shadow-lg-custom focus:outline-none focus:shadow-outline button-hover-effect portal-button" data-portal="admin">
+                            Go to Admin Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recordings" class="py-20 px-6 bg-white animate-fadeIn">
+        <div class="container mx-auto text-center">
+            <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-logo-green animate-slideInUp">
+                Class Recordings
+            </h2>
+            <p class="leading-normal text-xl mb-8 text-gray-700 animate-slideInUp" style="animation-delay: 0.2s;">
+                Access secure recordings of your classes.
+            </p>
+            <div class="flex flex-wrap -mx-4 mt-10">
+                <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.3s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Recording - Class Date</h3>
+                        <p class="text-gray-700 mb-4">Topic covered in this class.</p>
+                        <button class="hover:underline logo-green text-white font-bold rounded-full my-3 py-3 px-6 shadow-lg-custom focus:outline-none focus:shadow-outline button-hover-effect view-recording-button">
+                            View Recording
+                        </button>
+                    </div>
+                </div>
+                 <div class="w-full md:w-1/2 lg:w-1/3 px-4 mb-8 animate-slideInUp" style="animation-delay: 0.4s;">
+                    <div class="p-6 bg-gray-100 rounded-xl shadow-md card-hover-effect">
+                        <h3 class="text-xl font-bold mb-3 text-logo-green">Recording - Class Date</h3>
+                        <p class="text-gray-700 mb-4">Topic covered in this class.</p>
+                        <button class="hover:underline logo-green text-white font-bold rounded-full my-3 py-3 px-6 shadow-lg-custom focus:outline-none focus:shadow-outline button-hover-effect view-recording-button">
+                            View Recording
+                        </button>
+                    </div>
+                </div>
+                </div>
+        </div>
+    </section>
+
+     <section id="contact" class="py-20 px-6 bg-white animate-fadeIn">
+        <div class="container mx-auto text-center">
+            <h2 class="w-full my-2 text-4xl font-bold leading-tight text-center text-logo-green animate-slideInUp">
+                Get in Touch
+            </h2>
+            <div class="flex flex-wrap justify-center mt-10">
+                <div class="w-full md:w-2/3 lg:w-1/2 animate-slideInUp" style="animation-delay: 0.1s;">
+                    <form class="w-full max-w-lg mx-auto">
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+                                    First Name
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-first-name" type="text" placeholder="Jane">
+                            </div>
+                            <div class="w-full md:w-1/2 px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-last-name">
+                                    Last Name
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded-xl py-3 px-4 leading-tight focus:outline-none focus:bg-white" id="grid-last-name" type="text" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-email">
+                                    E-mail
+                                </label>
+                                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="grid-email" type="email" placeholder="email@example.com">
+                            </div>
+                        </div>
+                        <div class="flex flex-wrap -mx-3 mb-6">
+                            <div class="w-full px-3">
+                                <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-message">
+                                    Message
+                                </label>
+                                <textarea class="no-resize appearance-none block w-full bg-gray-200 text-gray-700 border rounded-xl py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white h-48 resize-none" id="grid-message" placeholder="Your message here..."></textarea>
+                            </div>
+                        </div>
+                        <div class="md:flex md:items-center">
+                            <div class="md:w-1/3">
+                                <button class="shadow logo-green hover:bg-logo-yellow hover:text-logo-green focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded-xl button-hover-effect" type="button">
+                                    Send
+                                </button>
+                            </div>
+                            <div class="md:w-2/3"></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+             <div class="mt-10 text-left animate-slideInUp" style="animation-delay: 0.2s;">
+                <p class="text-lg font-bold text-logo-green mb-4">Contact Information:</p>
+                <p class="text-gray-700 mb-2"><span class="font-semibold">Pakistan:</span> +92 304 2846421</p>
+                <p class="text-gray-700 mb-2"><span class="font-semibold">International:</span> +44 7480 676283 (Available on WhatsApp, Imo, Viber, Botim, Line, Duo, ToTok)</p>
+                <p class="text-gray-700 mb-2"><span class="font-semibold">Email:</span> info@madaniislamicacademy.com</p>
+                <p class="text-gray-700 mb-2"><span class="font-semibold">Website:</span> madaniislamicacademy.com</p>
+                <div class="flex mt-4">
+                    <a href="https://www.youtube.com/@madaniislamicacademy" target="_blank" class="text-logo-green hover:text-logo-yellow mr-4"><i class="fab fa-youtube"></i> YouTube</a>
+                    <a href="https://www.facebook.com/madaniislamicacademy" target="_blank" class="text-logo-green hover:text-logo-yellow mr-4"><i class="fab fa-facebook"></i> Facebook</a>
+                    <a href="https://www.instagram.com/madaniislamicacademy" target="_blank" class="text-logo-green hover:text-logo-yellow mr-4"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="https://www.linkedin.com/in/madaniislamicacademy" target="_blank" class="text-logo-green hover:text-logo-yellow mr-4"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                    <a href="https://www.pinterest.com/madaniislamicacademy1" target="_blank" class="text-logo-green hover:text-logo-yellow mr-4"><i class="fab fa-pinterest"></i> Pinterest</a>
+                    <a href="https://www.tiktok.com/@madaniislamicacademy" target="_blank" class="text-logo-green hover:text-logo-yellow mr-4"><i class="fab fa-tiktok"></i> TikTok</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="logo-green text-white py-8 px-6 animate-fadeIn">
+        <div class="container mx-auto text-center">
+            <p>&copy; 2023 Madani Islamic Academy. All rights reserved.</p>
+            <p class="mt-2">Address: [Your Address Here]</p>
+        </div>
+    </footer>
+
+    <div id="portalModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="modalTitle" class="text-2xl font-bold mb-4 text-logo-green"></h2>
+            <p id="modalContent" class="text-gray-700">This is a placeholder for the portal content.</p>
+            </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        document.getElementById('nav-toggle').onclick = function() {
+            document.getElementById('nav-content').classList.toggle('hidden');
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                 // Hide mobile menu after clicking a link
+                if (document.getElementById('nav-content').classList.contains('block')) {
+                     document.getElementById('nav-content').classList.remove('block');
+                     document.getElementById('nav-content').classList.add('hidden');
+                }
+            });
+        });
+
+        // Simulate Portal Button Clicks with Modal
+        const portalButtons = document.querySelectorAll('.portal-button');
+        const modal = document.getElementById('portalModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+        const closeButton = document.querySelector('.close-button');
+
+        portalButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const portalType = this.getAttribute('data-portal');
+                modalTitle.textContent = `${portalType.charAt(0).toUpperCase() + portalType.slice(1)} Portal Access`;
+                modalContent.innerHTML = `<p>This is a simulated access to the ${portalType} portal.</p><p>In a real application, this would lead to a login page or dashboard.</p>`; // Placeholder content
+                modal.style.display = 'flex'; // Use flex to center the modal
+            });
+        });
+
+         // Simulate View Recording Button Clicks with Modal
+        const viewRecordingButtons = document.querySelectorAll('.view-recording-button');
+
+        viewRecordingButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                modalTitle.textContent = 'View Recording';
+                modalContent.innerHTML = '<p>This is a placeholder for viewing a class recording.</p><p>In a real application, a video player would appear here.</p>'; // Placeholder content
+                modal.style.display = 'flex'; // Use flex to center the modal
+            });
+        });
+
+        // Close the modal
+        closeButton.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        // Close the modal if the user clicks outside of it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // Learn More button smooth scroll
+        document.querySelector('.learn-more-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#features').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+    </script>
+
+</body>
+</html>
