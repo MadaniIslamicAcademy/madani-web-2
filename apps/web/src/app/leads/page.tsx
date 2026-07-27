@@ -1,0 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import PageHeader from "@/components/PageHeader";
+import StatusBadge from "@/components/StatusBadge";
+import { apiFetch } from "@/lib/api";
+import type { Lead } from "@/lib/types";
+
+export default function LeadsPage(){const [items,setItems]=useState<Lead[]>([]);async function load(){setItems(await apiFetch<Lead[]>("/leads"))}useEffect(()=>{load()},[]);async function setStatus(id:string,status:string){await apiFetch(`/leads/${id}`,{method:"PATCH",body:JSON.stringify({status})});await load()}return <><PageHeader eyebrow="WhatsApp admissions" title="Admission leads" description="The agent collects details but leaves fee and timing confirmation to the Admissions Department."/><section className="lead-grid">{items.map(lead=><article className="lead-card" key={lead.id}><div className="lead-head"><div><strong>{lead.student_name||"Name pending"}</strong><small>{lead.phone_number}</small></div><StatusBadge status={lead.status}/></div><dl><div><dt>Father or guardian</dt><dd>{lead.father_name||"Pending"}</dd></div><div><dt>Age</dt><dd>{lead.age||"Pending"}</dd></div><div><dt>Course</dt><dd>{lead.course||"Pending"}</dd></div><div><dt>Preferred days</dt><dd>{lead.preferred_days||"Pending"}</dd></div><div><dt>Preferred time</dt><dd>{lead.preferred_time||"Pending"}</dd></div><div><dt>Country</dt><dd>{lead.country||"Pending"}</dd></div></dl>{lead.summary&&<pre>{lead.summary}</pre>}<div className="lead-actions"><button onClick={()=>setStatus(lead.id,"contacted")}>Mark contacted</button><button className="approve" onClick={()=>setStatus(lead.id,"enrolled")}>Mark enrolled</button></div></article>)}{!items.length&&<div className="empty-large"><h3>No admission leads yet</h3><p>Leads will appear after the WhatsApp webhook receives messages.</p></div>}</section></>}
