@@ -1,0 +1,50 @@
+name: Unpack full stack source
+
+on:
+  push:
+    branches:
+      - agent/full-stack-social-automation-platform
+    paths:
+      - .source/**
+      - .github/workflows/unpack-fullstack-source.yml
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Rebuild and verify archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .source/fullstack.tar.xz.b64.part* | base64 --decode > /tmp/fullstack.tar.xz
+          xz --test /tmp/fullstack.tar.xz
+          mkdir -p /tmp/fullstack-source
+          tar -xJf /tmp/fullstack.tar.xz -C /tmp/fullstack-source
+          test -f /tmp/fullstack-source/madani-social-automation-platform/README.md
+          test -f /tmp/fullstack-source/madani-social-automation-platform/apps/api/app/main.py
+          test -f /tmp/fullstack-source/madani-social-automation-platform/apps/web/package.json
+
+      - name: Replace branch with editable source files
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+          cp -a /tmp/fullstack-source/madani-social-automation-platform/. .
+
+      - name: Commit expanded project
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          git commit -m "Add complete full stack social automation platform"
+          git push origin HEAD:agent/full-stack-social-automation-platform
